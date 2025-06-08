@@ -13,6 +13,7 @@ print("Contenu du dossier bert_model_final :", os.listdir("./bert_model_final"))
 @st.cache_resource
 def load_model():
     model_path = os.path.join(".", "bert_model_final")
+    #commenter la ligne ci dessus pour modèle en ligne
     tokenizer = BertTokenizer.from_pretrained(model_path)
     model = BertForSequenceClassification.from_pretrained(model_path)
     model.eval()
@@ -35,7 +36,7 @@ def predict(text):
 #st.set_page_config(page_title="Mental Health Classifier", layout="centered")
 
 st.title("Mental Health Text Classifier")
-st.markdown("Ce modle prédit un **trouble psychologique** à partir d’un texte libre. Il utilise un modèle **BERT fine-tuné** sur un dataset Reddit issu de Kaggle.")
+st.markdown("Ce modèle prédit un **trouble psychologique** à partir d’un texte libre. Il utilise un modèle **BERT fine-tuné** sur un dataset Reddit issu de Kaggle.")
 
 st.sidebar.title("À propos")
 st.sidebar.markdown("""
