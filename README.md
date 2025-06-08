@@ -9,12 +9,15 @@
 
 ```
 mental_health_nlp/
-├── app.py                      # Application Streamlit pour prédiction en temps réel
-├── bert_model_final/          # Modèle BERT fine-tuné (via Hugging Face Transformers)
-├── notebook/
-│   └── Projet_DeepLearning.ipynb  # Notebook principal : EDA + Modélisation
-├── requirements.txt           # Librairies nécessaires
-└── README.md                  # Documentation (ce fichier)
+├── app.py                # Streamlit app
+├── utils.py              # Fonctions utiles (prédiction, traduction, etc.)
+├── download_model.py     # Téléchargement auto depuis Google Drive
+├── Projet_DeepLearning.ipynb
+├── requirements.txt       # Librairies nécessaires
+├── README.md              # Documentation
+└── .gitignore
+
+
 ```
 
 
@@ -79,58 +82,36 @@ L'application permet :
 ### Lancer l'application :
 
 ```bash
+streamlit run app.py
 
-<<<<<<< HEAD
-## Déploiement
-
-Vous pouvez déployer l'application en ligne via :
-
-- Streamlit Cloud (https://streamlit.io/cloud)
-
-=======
 
 ## Déploiement
 
 Vous pouvez déployer l'application en ligne via :
 - [Streamlit Cloud](https://streamlit.io/cloud)
 
->>>>>>> 18c6811 (Mise à jour fichiers utils, app.py,...)
 
 ## Installation
 
 ### En local :
 
 ```bash
-git clone https://github.com/MlkNk/Deep_Learning_Project.git
+git clone https://github.com/<nom-utilisateur>/mental_health_nlp.git
 cd mental_health_nlp
 pip install -r requirements.txt
-
 streamlit run app.py
 ```
 
-<<<<<<< HEAD
+
 ⚠️ **Note importante sur le déploiement en ligne**
 
-Le fichier du modèle fine-tuné `bert_model_final/` dépasse la limite de 100 Mo imposée par GitHub.
-Il ne peut donc pas être hébergé dans ce dépôt, ce qui empêche le fonctionnement de l'app sur Streamlit Cloud.
+Le modèle BERT fine-tuné `(./bert_model_final/)` utilisé pour ce projet, ne peut pas être versionné sur GitHub car il contient un fichier lourd qui dépasse la limite de 100 Mo imposée par GitHub.
 
-Cependant, le projet fonctionne **parfaitement en local**, comme prévu dans les consignes.  
-Téléchargez le modèle ici : [Lien Google Drive] (https://drive.google.com/drive/folders/13JxqoPs9otts1EMQ_v6Cn7o36FRVZClm?usp=sharing).
+Cependant, pour que le déploiement Streamlit puisse fonctionner comme prévu dans les consignes, en ligne et en local, nous avons inclus un fichier download.py. 
+Celui-ci nous permettra de télécharger automatiquement le dossier bert_model_final zippé et chargé via notre lien GDrive.
 
-Placez le dossier `bert_model_final/` à la racine du projet, puis exécutez `streamlit run app.py`.
+Si besoin, téléchargez le modèle ici : [Lien Google Drive] (https://drive.google.com/file/d/1O5Z2moYiT0ji-YbviEXgVUEa0ahF9YFa/view?usp=drive_link).
+
 
 > Le fichier lourd du dossier est précisement `model.safetensors` : taille ~417 Mo. 
 > Ce fichier contient les poids du modèle BERT fine-tuné utilisé pour la classification des textes. Il est nécessaire pour exécuter les prédictions avec l'application Streamlit (`app.py`).
-
-=======
-# **Note importante sur le déploiement en ligne :
-
-Le modèle BERT fine-tuné (./bert_model_final/) utilisé possède un fichier lourd (précisement `model.safetensors` : taille ~417 Mo) qui ne peut pas être versionné sur GitHub ni chargé directement via Streamlit Cloud, en raison des limitations techniques (limite de 100 Mo par fichier sur GitHub, et limitations de Streamlit Cloud).
-
-> Ce fichier contient les poids du modèle BERT fine-tuné utilisé pour la classification des textes. Il est nécessaire pour exécuter les prédictions avec l'application Streamlit (`app.py`).
-
-# ** L'application fonctionne parfaitement en local avec : streamlit run app.py dans le terminal qui du dossier du projet.
-
-###Il sera fourni séparément, bien vouloir l'intégrer dans le dossier.
->>>>>>> 18c6811 (Mise à jour fichiers utils, app.py,...)
-
