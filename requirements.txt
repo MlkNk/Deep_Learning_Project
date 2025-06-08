@@ -9,6 +9,7 @@ seaborn
 
 # NLP & Transformers
 transformers
+sentencepiece
 datasets
 tokenizers
 
@@ -17,5 +18,6 @@ torch
 
 # Interface
 streamlit
+gdown
 
 

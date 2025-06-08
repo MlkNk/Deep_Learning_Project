@@ -80,12 +80,21 @@ L'application permet :
 
 ```bash
 
+<<<<<<< HEAD
 ## Déploiement
 
 Vous pouvez déployer l'application en ligne via :
 
 - Streamlit Cloud (https://streamlit.io/cloud)
 
+=======
+
+## Déploiement
+
+Vous pouvez déployer l'application en ligne via :
+- [Streamlit Cloud](https://streamlit.io/cloud)
+
+>>>>>>> 18c6811 (Mise à jour fichiers utils, app.py,...)
 
 ## Installation
 
@@ -99,6 +108,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+<<<<<<< HEAD
 ⚠️ **Note importante sur le déploiement en ligne**
 
 Le fichier du modèle fine-tuné `bert_model_final/` dépasse la limite de 100 Mo imposée par GitHub.
@@ -112,4 +122,15 @@ Placez le dossier `bert_model_final/` à la racine du projet, puis exécutez `st
 > Le fichier lourd du dossier est précisement `model.safetensors` : taille ~417 Mo. 
 > Ce fichier contient les poids du modèle BERT fine-tuné utilisé pour la classification des textes. Il est nécessaire pour exécuter les prédictions avec l'application Streamlit (`app.py`).
 
+=======
+# **Note importante sur le déploiement en ligne :
+
+Le modèle BERT fine-tuné (./bert_model_final/) utilisé possède un fichier lourd (précisement `model.safetensors` : taille ~417 Mo) qui ne peut pas être versionné sur GitHub ni chargé directement via Streamlit Cloud, en raison des limitations techniques (limite de 100 Mo par fichier sur GitHub, et limitations de Streamlit Cloud).
+
+> Ce fichier contient les poids du modèle BERT fine-tuné utilisé pour la classification des textes. Il est nécessaire pour exécuter les prédictions avec l'application Streamlit (`app.py`).
+
+# ** L'application fonctionne parfaitement en local avec : streamlit run app.py dans le terminal qui du dossier du projet.
+
+###Il sera fourni séparément, bien vouloir l'intégrer dans le dossier.
+>>>>>>> 18c6811 (Mise à jour fichiers utils, app.py,...)
 

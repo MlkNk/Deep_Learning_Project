@@ -1,14 +1,11 @@
 import streamlit as st
-import os
-import torch
-from transformers import BertTokenizer, BertForSequenceClassification
 import matplotlib.pyplot as plt
+import torch
 
-# Liste des labels dans l'ordre de ton fine-tuning
-LABELS = ['Anxiety', 'Bipolar', 'Depression', 'Normal', 'Personality disorder', 'Stress', 'Suicidal']
+st.set_page_config(page_title="🧠 Mental Health Classifier", layout="wide")
 
-st.set_page_config(page_title="Mental Health Classifier", layout="centered")
-print("Contenu du dossier bert_model_final :", os.listdir("./bert_model_final"))
+from utils import translate_text, predict, LABELS
+from download_model import download_model
 
 @st.cache_resource
 def load_model():
@@ -19,46 +16,41 @@ def load_model():
     model.eval()
     return tokenizer, model
 
-tokenizer, model = load_model()
+download_model()
 
+# --- UI setup ---
 
-def predict(text):
-    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
-    with torch.no_grad():
-        outputs = model(**inputs)
-    logits = outputs.logits
-    probs = torch.softmax(logits, dim=1).squeeze()
-    predicted_class_id = torch.argmax(probs).item()
-    return LABELS[predicted_class_id], probs
+st.title("🧠 Mental Health Text Classifier")
+st.markdown("Détection automatique de troubles psychologiques à partir d’un texte libre. Basé sur **BERT fine-tuné**.")
 
-# --- UI Streamlit ---
+col1, col2 = st.columns([3, 1])
 
-#st.set_page_config(page_title="Mental Health Classifier", layout="centered")
+with col1:
+    text = st.text_area("✍️ Entrez un texte (Français ou Anglais)", height=200)
 
-st.title("Mental Health Text Classifier")
-st.markdown("Ce modèle prédit un **trouble psychologique** à partir d’un texte libre. Il utilise un modèle **BERT fine-tuné** sur un dataset Reddit issu de Kaggle.")
+with col2:
+    language = st.selectbox("Langue du texte :", ["Français", "English"])
+    show_probs = st.checkbox("Afficher les probabilités")
 
-st.sidebar.title("À propos")
-st.sidebar.markdown("""
-Projet NLP | Transfert Learning  
-Modèle utilisé : `BERT-base`  
-Entrainement : 3 epochs, fine-tuning complet  
-F1-macro : **0.78**  
-""")
+if st.button("🔍 Analyser"):
+    if text.strip():
+        translated = translate_text(text, language)
+        prediction, probabilities = predict(translated)
+        st.success(f"### ✅ Prédiction : **{prediction}**")
 
-user_input = st.text_area("Entrez un texte (en anglais) :", height=200)
-
-show_probs = st.checkbox("Afficher les probabilités pour chaque classe")
-
-if st.button("Prédire"):
-    if user_input.strip():
-        prediction, probabilities = predict(user_input)
-        st.success(f"### Prédiction : {prediction}")
-        
         if show_probs:
-            st.subheader("Probabilités par classe")
-            prob_dict = {LABELS[i]: float(probabilities[i]) for i in range(len(LABELS))}
-            st.bar_chart(prob_dict)
+            st.subheader("📊 Distribution des probabilités")
+            fig, ax = plt.subplots()
+            ax.barh(LABELS, probabilities.numpy(), color="skyblue")
+            ax.set_xlim(0, 1)
+            st.pyplot(fig)
     else:
         st.warning("Veuillez entrer un texte à analyser.")
 
+st.sidebar.markdown("### 📁 Infos modèle")
+st.sidebar.markdown("""
+- Modèle : BERT-base (HuggingFace)
+- Fine-tuning : 3 epochs sur données Reddit
+- F1-macro : **0.78**
+- 7 classes : Anxiety, Bipolar, Depression, Normal, Personality disorder, Stress, Suicidal
+""")
