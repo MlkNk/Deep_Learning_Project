@@ -17,6 +17,7 @@ def load_model():
     return tokenizer, model
 
 
+
 tokenizer, model = load_model()
 
 @st.cache_resource
