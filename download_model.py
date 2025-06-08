@@ -6,7 +6,7 @@ def download_model():
     model_folder = "bert_model_final"
     if not os.path.exists(model_folder):
         os.makedirs(model_folder, exist_ok=True)
-        url = "https://drive.google.com/file/d/1O5Z2moYiT0ji-YbviEXgVUEa0ahF9YFa/view?usp=sharing"
+        url = "https://drive.google.com/uc?id=1O5Z2moYiT0ji-YbviEXgVUEa0ahF9YFa"
         output = "bert_model_final.zip"
         gdown.download(url, output, quiet=False)
 

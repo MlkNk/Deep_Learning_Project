@@ -7,15 +7,6 @@ st.set_page_config(page_title="🧠 Mental Health Classifier", layout="wide")
 from utils import translate_text, predict, LABELS
 from download_model import download_model
 
-@st.cache_resource
-def load_model():
-    model_path = os.path.join(".", "bert_model_final")
-    #commenter la ligne ci dessus pour modèle en ligne
-    tokenizer = BertTokenizer.from_pretrained(model_path)
-    model = BertForSequenceClassification.from_pretrained(model_path)
-    model.eval()
-    return tokenizer, model
-
 download_model()
 
 # --- UI setup ---
