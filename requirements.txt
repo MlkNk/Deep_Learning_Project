@@ -1,0 +1,21 @@
+# Traitement de données
+pandas
+numpy
+scikit-learn
+
+# Visualisation
+matplotlib
+seaborn
+
+# NLP & Transformers
+transformers
+datasets
+tokenizers
+
+# PyTorch
+torch
+
+# Interface
+streamlit
+
+
