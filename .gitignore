@@ -192,3 +192,4 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignorebert_model_final/model.safetensors
+bert_model_final/model.safetensors
