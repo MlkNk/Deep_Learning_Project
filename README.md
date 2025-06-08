@@ -12,10 +12,11 @@ mental_health_nlp/
 ├── app.py                      # Application Streamlit pour prédiction en temps réel
 ├── bert_model_final/          # Modèle BERT fine-tuné (via Hugging Face Transformers)
 ├── notebook/
-│   └── analyse_DeepLearningL.ipynb  # Notebook principal : EDA + Modélisation
+│   └── Projet_DeepLearning.ipynb  # Notebook principal : EDA + Modélisation
 ├── requirements.txt           # Librairies nécessaires
 └── README.md                  # Documentation (ce fichier)
 ```
+
 
 ## Objectif du projet : Mental Health NLP Classifier - Reddit Comments
 
@@ -29,7 +30,7 @@ Le projet explore les performances de 3 approches différentes :
 
 ## Jeu de données
 
-Le jeu de données est issu de [Kaggle](https://www.kaggle.com/) : il contient plus de 10 000 commentaires Reddit labellisés selon différents troubles psychologiques :
+Le jeu de données est issu de [Kaggle](https://www.kaggle.com/datasets/suchintikasarkar/sentiment-analysis-for-mental-health/data) : il contient plus de 10 000 commentaires Reddit labellisés selon différents troubles psychologiques :
 
 | Classe                 | Exemple             |
 |------------------------|---------------------|
@@ -78,22 +79,33 @@ L'application permet :
 ### Lancer l'application :
 
 ```bash
-streamlit run app.py
 
-
-## Déploiement (optionnel)
+## Déploiement
 
 Vous pouvez déployer l'application en ligne via :
-- [Streamlit Cloud](https://streamlit.io/cloud)
-- Hugging Face Spaces (si modèle public)
 
-## 📦 Installation
+- Streamlit Cloud (https://streamlit.io/cloud)
+
+
+## Installation
 
 ### En local :
 
 ```bash
-git clone https://github.com/<nom-utilisateur>/mental_health_nlp.git
+git clone https://github.com/MlkNk/Deep_Learning_Project.git
 cd mental_health_nlp
 pip install -r requirements.txt
+
+streamlit run app.py
 ```
+
+## **Note importante sur le déploiement en ligne :
+
+Le modèle BERT fine-tuné (./bert_model_final/) utilisé possède un fichier lourd (précisement `model.safetensors` : taille ~417 Mo) qui ne peut pas être versionné sur GitHub ni chargé directement via Streamlit Cloud, en raison des limitations techniques (limite de 100 Mo par fichier sur GitHub, et limitations de Streamlit Cloud).
+
+> Ce fichier contient les poids du modèle BERT fine-tuné utilisé pour la classification des textes. Il est nécessaire pour exécuter les prédictions avec l'application Streamlit (`app.py`).
+
+### ** L'application fonctionne parfaitement en local avec : streamlit run app.py dans le terminal qui du dossier du projet.
+
+** Il sera fourni séparément, bien vouloir l'intégrer dans le dossier.
 
